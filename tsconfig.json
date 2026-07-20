@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    /* 基础配置 */
+    "target": "ESNext",          // 编译后的 JS 版本
+    "useDefineForClassFields": true,
+    "module": "ESNext",          // 模块系统
+    "moduleResolution": "Bundler", // 关键：配合 Vite 这种打包工具
+    "strict": true,              // 开启严格模式（TS 的灵魂）
+    "jsx": "preserve",
+    "sourceMap": true,
+
+    /* 路径解析 */
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "lib": ["ESNext", "DOM"],    // 运行时库
+    "types": ["vite/client"],    // 识别 Vite 特有的环境变量（如 import.meta.env）
+
+    /* 路径别名（必须和 vite.config.ts 里的 alias 对应） */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue", // 让 TS 检查 .vue 文件
+    "tests/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
