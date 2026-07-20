@@ -46,57 +46,17 @@
   </div>
 </template>
 
-<script setup>
-import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+<script setup lang="ts">
 import { useWordStore } from '../store'
+import { useWordNavigation } from '@/composables/useWordNavigation'
 
 const store = useWordStore()
-const currentIndex = ref(0)
-const showDetails = ref(false)
 
-const currentWord = computed(() => {
-  return store.vocabBook[currentIndex.value] || null
-})
-
-// Ensure currentIndex is valid if the list shrinks
-watch(() => store.vocabBook.length, (newLength) => {
-  if (currentIndex.value >= newLength && newLength > 0) {
-    currentIndex.value = newLength - 1
+// 复用通用导航逻辑：← 从生词本移除
+const { currentIndex, showDetails, currentWord } = useWordNavigation(
+  () => store.vocabBook,
+  {
+    onLeft: (word) => store.removeFromVocab(word)
   }
-})
-
-const handleKeydown = (e) => {
-  if (!currentWord.value) return
-
-  switch (e.key) {
-    case 'ArrowUp':
-      e.preventDefault()
-      if (currentIndex.value > 0) currentIndex.value--
-      showDetails.value = false
-      break
-    case 'ArrowDown':
-      e.preventDefault()
-      if (currentIndex.value < store.vocabBook.length - 1) currentIndex.value++
-      showDetails.value = false
-      break
-    case 'ArrowLeft':
-      e.preventDefault()
-      store.removeFromVocab(currentWord.value)
-      showDetails.value = false
-      break
-    case ' ':
-      e.preventDefault()
-      showDetails.value = !showDetails.value
-      break
-  }
-}
-
-onMounted(() => {
-  window.addEventListener('keydown', handleKeydown)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('keydown', handleKeydown)
-})
+)
 </script>
-

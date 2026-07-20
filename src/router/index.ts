@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Learn from '../views/Learn.vue'
+import Learn from '@/views/Learn.vue'
 import VocabBook from '../views/VocabBook.vue'
 import Status from '../views/Status.vue'
 

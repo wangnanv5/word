@@ -47,61 +47,18 @@
   </div>
 </template>
 
-<script setup>
-import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+<script setup lang="ts">
 import { useWordStore } from '../store'
+import { useWordNavigation } from '@/composables/useWordNavigation'
 
 const store = useWordStore()
-const currentIndex = ref(0)
-const showDetails = ref(false)
 
-const currentWord = computed(() => {
-  return store.learningList[currentIndex.value] || null
-})
-
-// Ensure currentIndex is valid if the list shrinks
-watch(() => store.learningList.length, (newLength) => {
-  if (currentIndex.value >= newLength && newLength > 0) {
-    currentIndex.value = newLength - 1
+// 复用通用导航逻辑：← 标记为已掌握，→ 加入生词本
+const { currentIndex, showDetails, currentWord } = useWordNavigation(
+  () => store.learningList,
+  {
+    onLeft: (word) => store.markAsLearned(word),
+    onRight: (word) => store.addToVocab(word)
   }
-})
-
-const handleKeydown = (e) => {
-  if (!currentWord.value) return
-
-  switch (e.key) {
-    case 'ArrowUp':
-      e.preventDefault()
-      if (currentIndex.value > 0) currentIndex.value--
-      showDetails.value = false // reset detail view
-      break
-    case 'ArrowDown':
-      e.preventDefault()
-      if (currentIndex.value < store.learningList.length - 1) currentIndex.value++
-      showDetails.value = false
-      break
-    case 'ArrowLeft':
-      e.preventDefault()
-      store.markAsLearned(currentWord.value)
-      showDetails.value = false
-      break
-    case 'ArrowRight':
-      e.preventDefault()
-      store.addToVocab(currentWord.value)
-      showDetails.value = false
-      break
-    case ' ':
-      e.preventDefault()
-      showDetails.value = !showDetails.value
-      break
-  }
-}
-
-onMounted(() => {
-  window.addEventListener('keydown', handleKeydown)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('keydown', handleKeydown)
-})
+)
 </script>

@@ -30,21 +30,20 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 import { useWordStore } from '../store'
+import { getTodayDateString } from '@/utils/date'
 
 const store = useWordStore()
 
-const getTodayDateString = () => {
-  const date = new Date()
-  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
-}
-
-const todayStats = computed(() => {
-  const today = getTodayDateString()
-  return store.dailyStats[today] || { learned: 0, added: 0 }
-})
+/**
+ * 今日统计数据：通过共享的日期工具获取“今天”键名，
+ * 若该日尚无记录则用默认值兜底，避免模板中出现 undefined。
+ */
+const todayStats = computed(
+  () => store.dailyStats[getTodayDateString()] ?? { learned: 0, added: 0 }
+)
 
 const todayLearned = computed(() => todayStats.value.learned)
 const todayAdded = computed(() => todayStats.value.added)
