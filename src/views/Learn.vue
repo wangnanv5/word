@@ -1,8 +1,9 @@
 <template>
   <div class="learn-container">
     <div class="column">
-      <h2 class="mt-0 text-#2c3e50 border-b-2 border-b-gray-100 pb-2">单词栏</h2>
-      <ul class="list-none p-0 m-0 overflow-y-auto flex-1">
+      <h2 class="mt-0 text-#2c3e50 border-b-40 border-b-gray-100 pb-2">单词栏</h2>
+      <ul class="list-decimal list-inside p-0 m-0 overflow-y-auto flex-1 scrollbar-hide" 
+      style="-ms-overflow-style: none; scrollbar-width: none;">
         <li 
           v-for="(word, index) in store.learningList" 
           :key="word.id"
@@ -48,7 +49,7 @@
 </template>
 
 <script setup lang="ts">
-import { useWordStore } from '../store'
+import { useWordStore } from '@/store'
 import { useWordNavigation } from '@/composables/useWordNavigation'
 
 const store = useWordStore()

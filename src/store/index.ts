@@ -1,12 +1,9 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+
 import type { DailyStat, DailyStats, Word } from '@/types/word'
 import { getTodayDateString } from '@/utils/date'
 
-/**
- * 模拟的初始单词数据。
- * 实际项目中通常改为从后端接口拉取；此处保持静态数据以便演示。
- */
 const mockWords: Word[] = [
   { id: 1, word: 'apple', phonetic: '/ˈæp(ə)l/', translation: '苹果' },
   { id: 2, word: 'banana', phonetic: '/bəˈnɑːnə/', translation: '香蕉' },
@@ -17,7 +14,37 @@ const mockWords: Word[] = [
   { id: 7, word: 'grape', phonetic: '/ɡreɪp/', translation: '葡萄' },
   { id: 8, word: 'honeydew', phonetic: '/ˈhʌnidjuː/', translation: '蜜瓜' },
   { id: 9, word: 'kiwi', phonetic: '/ˈkiːwi/', translation: '猕猴桃' },
-  { id: 10, word: 'lemon', phonetic: '/ˈlemən/', translation: '柠檬' }
+  { id: 10, word: 'lemon', phonetic: '/ˈlemən/', translation: '柠檬' },
+  { id: 11, word: 'mango', phonetic: '/ˈmæŋɡoʊ/', translation: '芒果' },
+  { id: 12, word: 'orange', phonetic: '/ˈɒrənd/', translation: '橘子' },
+  { id: 13, word: 'pear', phonetic: '/pɛr/', translation: '梨' },
+  { id: 14, word: 'plum', phonetic: '/plʌm/', translation: '李子' },
+  { id: 15, word: 'pomegranate', phonetic: '/ˈpoməgreɪnət/', translation: '石榴' },
+  { id: 16, word: 'strawberry', phonetic: '/ˈstrawb(ə)ry/', translation: '草莓' },
+  { id: 17, word: 'watermelon', phonetic: '/ˈwɔtəm(ə)l/', translation: '西瓜' },
+  { id: 18, word: 'blueberry', phonetic: '/ˈblu(ə)b(ə)r/', translation: '蓝莓' },
+  { id: 19, word: 'raspberry', phonetic: '/ˈræs(ə)b(ə)r/', translation: '小RIDDLE' },
+  { id: 20, word: 'blackberry', phonetic: '/ˈblæk(ə)b(ə)r/', translation: '黑莓' },
+  { id: 21, word: 'cantaloupe', phonetic: '/ˈkæntəljuːp/', translation: ' cantaloupe' },
+  { id: 22, word: 'coconut', phonetic: '/ˈkɒnət/', translation: '椰子' },
+
+
+  { id: 23, word: 'papaya', phonetic: '/ˈpæpəjə/', translation: '番石榴' },
+  { id: 24, word: 'pearl', phonetic: '/ˈpɛrəl/', translation: '珍珠' },
+  { id: 25, word: 'peach', phonetic: '/ˈpeɪtʃ/', translation: '桃' },
+  { id: 26, word: 'plum', phonetic: '/plʌm/', translation: '李子' },
+  { id: 27, word: 'pomegranate', phonetic: '/ˈpoməgreɪnət/', translation: '石榴' },
+  { id: 28, word: 'papaya', phonetic: '/ˈpæpəjə/', translation: '番石榴' },
+  { id: 29, word: 'pearl', phonetic: '/ˈpɛrəl/', translation: '珍珠' },
+  { id: 30, word: 'peach', phonetic: '/ˈpeɪtʃ/', translation: '桃' },
+  { id: 31, word: 'plum', phonetic: '/plʌm/', translation: '李子' },
+  { id: 32, word: 'pomegranate', phonetic: '/ˈpoməgreɪnət/', translation: '石榴' },
+  { id: 33, word: 'papaya', phonetic: '/ˈpæpəjə/', translation: '番石榴' },
+  { id: 34, word: 'pearl', phonetic: '/ˈpɛrəl/', translation: '珍珠' },
+  { id: 35, word: 'peach', phonetic: '/ˈpeɪtʃ/', translation: '桃' },
+  { id: 36, word: 'plum', phonetic: '/plʌm/', translation: '李子' },
+  { id: 37, word: 'pomegrffffffffffffffffffffffffffanate', phonetic: '/ˈpoməgreɪnət/', translation: '石榴' },
+  { id: 38, word: 'papaya', phonetic: '/ˈpæpəjə/', translation: '番石榴' }
 ]
 
 /**

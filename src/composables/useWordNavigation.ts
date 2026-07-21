@@ -10,10 +10,6 @@ export interface NavigationHandlers {
 }
 
 /**
- * 单词列表的通用导航与键盘交互组合式函数。
- *
- * Learn 与 VocabBook 两个视图的布局与交互高度相似（列表 + 详情 + 方向键），
- * 将其抽取为组合式函数可消除重复的声明与键盘处理逻辑，只通过回调区分业务差异。
  *
  * @param getList  返回当前单词列表的 getter，便于在列表引用变化时获取最新数据
  * @param handlers 左右方向键的自定义回调，按需传入
@@ -47,11 +43,6 @@ export function useWordNavigation(
     }
   )
 
-  /**
-   * 全局键盘事件处理：
-   * ↑/↓ 切换单词，←/→ 触发业务回调，空格切换释义显隐。
-   * 每次操作后重置 showDetails，避免释义在不同单词间串味。
-   */
   function handleKeydown(event: KeyboardEvent): void {
     if (!currentWord.value) return
 
