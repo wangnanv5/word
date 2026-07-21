@@ -1,6 +1,6 @@
 <template>
-  <div class="learn-container">
-    <div class="column">
+  <div class="flex gap-8 h-[calc(100vh-120px)]">
+    <div class="column" v-if="ui.layout === 'double'">
       <h2 class="mt-0 text-#2c3e50 border-b-40 border-b-gray-100 pb-2">单词栏</h2>
       <ul class="list-decimal list-inside p-0 m-0 overflow-y-auto flex-1 scrollbar-hide" 
       style="-ms-overflow-style: none; scrollbar-width: none;">
@@ -51,8 +51,10 @@
 <script setup lang="ts">
 import { useWordStore } from '@/store'
 import { useWordNavigation } from '@/composables/useWordNavigation'
+import { useUiStore } from '@/store/ui'
 
 const store = useWordStore()
+const ui = useUiStore()
 
 // 复用通用导航逻辑：← 标记为已掌握，→ 加入生词本
 const { currentIndex, showDetails, currentWord } = useWordNavigation(

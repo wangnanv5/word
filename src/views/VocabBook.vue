@@ -1,5 +1,5 @@
 <template>
-  <div class="learn-container">
+  <div class="flex gap-8 h-[calc(100vh-120px)]">
     <div class="column">
       <h2 class="mt-0 text-#2c3e50 border-b-2 border-b-gray-100 pb-2">我的单词本</h2>
       <ul class="list-none p-0 m-0 overflow-y-auto flex-1">
